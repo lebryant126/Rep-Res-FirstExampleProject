@@ -1,0 +1,8 @@
+---
+title: "Description of Analysis"
+author: "Lance Bryant"
+date: "December 3, 2014"
+output: html_document
+---
+
+The files in this folder analyze the data for the First Example Project.

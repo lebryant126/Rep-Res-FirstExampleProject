@@ -1,0 +1,54 @@
+---
+title: "Example Project: Reproducible Research with R and RStudio"
+author: "Lance Bryant"
+date: "December 4, 2014"
+output: html_document
+---
+
+## Organization
+
+The files for this project are arranged to make use of relative file paths. The arrangement is as follows:
+
+```
+Presentation documents
+|_
+   Analysis
+   |_
+      Data
+      |_
+        Raw Data
+```
+
+## Reproduce the Example
+
+Use the following directions to reproduce the data gathering, analysis, and presentation documents.
+
+First download this repository onto your computer.
+
+### Data Gathering
+
+Use the following code to reproduce the data gathering:
+
+```r
+# Set the working directory to this repository as needed for your system
+
+# Create the data file used in the analysis
+source("Analysis/Data/Make.R", chdir=TRUE)
+```
+
+### Analysis & Presentation Documents
+
+Use the following code to reproduce the analysis and presentation documents:
+
+```r
+# Set the working directory to this repository as needed for your system
+
+# Load the knitr package
+library(knitr)
+
+# Report.pdf
+knit2pdf("Report.Rnw")
+
+# Presentation.pdf
+knit2pdf("Presentation.Rnw")
+```

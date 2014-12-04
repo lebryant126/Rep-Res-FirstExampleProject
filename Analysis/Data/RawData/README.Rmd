@@ -1,0 +1,16 @@
+---
+title: "Raw data files for first example project"
+author: "Lance Bryant"
+date: "November 28, 2014"
+output: html_document
+---
+
+## Description of files
+
+Placement tests were given to students over a two-day periond. The day and score was recorded for each student. A different file exists for each day.
+
+## Session information
+
+```{r echo=FALSE}
+sessionInfo()
+```

@@ -1,0 +1,69 @@
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
+
+%% Load LaTeX packages
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usefonttheme{serif}
+
+%% Set knitr global options and gather data
+<<Global, include=FALSE>>=
+#### Set chunk options ####
+opts_chunk$set(fig.align='center', echo=FALSE, warning=FALSE)
+@
+
+%% Beamer pagakage settings
+\mode<presentation>
+{
+   \usetheme{default}
+  \usecolortheme{seahorse}
+  \setbeamercovered{transparent}
+}
+
+\title[Example]{An Example Presentation Using Knitr and Beamer}
+
+\author[Lance Bryant]{Lance Bryant\\
+Shippensburg University\\ \href{mailto:lebryant@ship.edu}{lebryant@ship.edu}}
+
+\date
+{\small November 24 2014}
+
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{The Table}
+Test score data were collected over a two-day period. The table below shows the number of passing and failing schools for each day.
+
+<<Table, results="asis">>=
+# Run source code to create bar plot
+source("Analysis/Table.R")
+@
+\end{frame}
+
+\begin{frame}{The Graph}
+The graph below displays participant test scores for each day. 
+
+<<ScorePlot, fig.cap="Comparison of Test Scores",out.width='2.5in', fig.pos='h!',out.extra='trim=0cm 2.5cm 0cm 0cm, clip=true'>>=
+# Run source code to create bar plot
+source("Analysis/Barplot.R")
+@
+\end{frame}
+
+\begin{frame}[fragile]{R Session Information}
+
+<<SessionInfo, echo=FALSE, results='asis'>>=
+toLatex(sessionInfo(), locale=FALSE)
+@
+
+\end{frame}
+
+\end{document}

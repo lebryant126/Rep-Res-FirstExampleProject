@@ -1,0 +1,68 @@
+---
+title: "Making the main data file"
+author: "Lance Bryant"
+date: "November 28, 2014"
+output: html_document
+---
+# Loading packages
+
+```{r}
+library(xtable)
+library(knitr)
+```
+
+# Loading the raw data files
+
+```{r}
+# Load raw data
+data_1 <- read.csv("RawData/testing_day_1.csv")
+data_2 <- read.csv("RawData/testing_day_2.csv")
+```
+
+# Gathering data files
+
+```{r}
+source("Gather1.R")
+source("Gather2.R")
+```
+
+# Merging data files
+
+```{r}
+source("Merge.R")
+```
+
+# Output main data file
+
+```{r}
+write.csv(main_data, "main_data.csv", row.names=FALSE)
+```
+
+# Output variable description
+
+```{r results='hide'}
+# Vector of variable namess
+variables <- names(main_data)
+
+# Vector of variable descriptions
+descriptions <- c("Date of testing", "Student test score", "Pass or fail")
+
+# Combine vectors into a table
+DescriptionsBound <- cbind(variables, descriptions)
+
+# Create an xtable object from Descriptions
+DescriptionsTable <- xtable(DescriptionsBound)
+
+# Format table in HTML
+DescriptTable <- print.xtable(DescriptionsTable, type = "html")
+
+cat("# Main data variable descriptions \n",
+    DescriptTable,
+    file = "Main_Data_VariableDescriptions.Rmd")
+
+knit2html("Main_Data_VariableDescriptions.Rmd")
+unlink("Main_Data_VariableDescriptions.md")
+```
+
+
+

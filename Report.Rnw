@@ -1,0 +1,84 @@
+\documentclass{article}
+
+%% Load LaTeX packages
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[authoryear]{natbib}
+
+%% Set knitr global options and gather data
+<<Global, include=FALSE>>=
+#### Set chunk options ####
+opts_chunk$set(fig.align='center', echo=FALSE, warning=FALSE)
+
+#### Load and cite R packages ####
+# Create list of packages
+PackagesUsed <- c("car", "knitr", "rmarkdown", "xtable", "repmis")
+
+# Load PackagesUsed and create .bib BibTeX file
+# Note must have repmis package installed.
+repmis::LoadandCite(PackagesUsed, file = "Packages.bib", install = FALSE)
+@
+
+
+
+\begin{document}
+%%%%%%%%%%%%% Create title %%%%%%%%%%%%%%%%%
+\title{An Example Report Using Knitr and Latex}
+\author{Lance Bryant \\
+Shippensburg University\thanks{Email: \href{mailto:lebryant@ship.edu}{lebryant@ship.edu}}}
+\date{November 24 2014}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Here is an example of a knit-able article class \LaTeX \,document. In the abstract we can describe what is contained in this report, and for what purpose. 
+\end{abstract}
+\newpage
+
+
+%%%%%%%%%%% Article Main Text %%%%%%%%%%%%%
+\section{Executive Summary}
+Here we give an overview of the results. 
+
+\section{The Table}
+Test score data were collected over a two-day period. The table below shows the number of passing and failing schools for each day.
+
+<<Table, results="asis">>=
+# Run source code to create bar plot
+source("Analysis/Table.R")
+@
+
+\section{The Graph}
+The graph below displays participant test scores for each day. 
+
+<<ScorePlot, fig.cap="Comparison of Test Scores",out.width='3.5in', fig.pos='h!',out.extra='trim=0cm 2.5cm 0cm 0cm, clip=true'>>=
+# Run source code to create bar plot
+source("Analysis/Barplot.R")
+@
+
+\newpage
+
+%%%%%%%%%%% Reproducing the Document %%%%%
+\section*{Appendix: Reproducing the Document}
+
+This document was created using the RStudio Version 0.98.1062 and the R package
+\emph{knitr} \citep{R-knitr}. It also relied on the R packages \emph{car}
+\citep{R-car},\emph{repmis} \citep{R-repmis}, \emph{rmarkdown} \citep{R-rmarkdown} and \emph{xtable} \citep{R-xtable}. The document can be completely reproduced from source files available on GitHub at:
+\url{https://github.com/lebryant126/Rep-Res-FirstExampleProject}.
+
+The workflow design was influenced by the book \emph{Reproducible Research with R and RStudio} by Christopher Gandrud \citep{Gandrud13}.\\
+
+The R session info is:
+
+<<SessionInfo, echo=FALSE, results='asis'>>=
+toLatex(sessionInfo())
+@
+
+%%%%%%%%% Bibliography %%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plainnat}
+\bibliography{Packages,Main}
+\end{document}
+

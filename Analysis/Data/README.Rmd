@@ -1,0 +1,16 @@
+---
+title: "Description of Data Gathering and Cleaning"
+author: "Lance Bryant"
+date: "November 28, 2014"
+output: html_document
+---
+
+The files in this folder gather data and clean data for the First Example Project.
+
+Run the file *Make.R* to create the main data file.
+
+The following session was used:
+
+```{r echo=FALSE}
+sessionInfo()
+```
